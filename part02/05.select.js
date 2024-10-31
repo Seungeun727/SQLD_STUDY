@@ -69,3 +69,47 @@
 
 // OFFSET 특정구간 데이터 조회
 // SELECT * FROM customer ORDER BY store_id ASC, first_name ASC LIMIT 10 OFFSET 10;
+
+
+
+// 데이터 그룹화 (GROUP BY. HAVING절)
+
+// 1. 데이터 그룹화 => GROUP BY
+// - 나열한 컬럼에 따라 그룹화 생성, 그룹화 된 순서 중요함
+// - 집계함수 사용: 데이터 그룹화 
+// - HAVING문 사용: 그룹화된 데이터 필터링
+
+
+// 1.1 DISTICT VS GROUP BY 
+// - DISTICT/GROUPBY : 중복 데이터 제거
+// - DISTICT : 중복 제거 O, 집계 X
+// - GROUPBY : 중복 제거 O, 집계 O 
+
+
+// 1-2 집계함수 
+// SUM() : 합계 구하는 함수 
+// AVG() :  평균 구하는 함수 (NULL값 무시)
+// MIN(): 최소값 구함
+// MAX() :  최대값 구함
+// COUNT() :  행의 개수 구현 (NULL값 무시)
+
+
+
+
+// HAVING 으로 데이터 필터
+// SELECT special_features, rating
+// FROM film 
+// GROUP BY special_features, rating
+// HAVING rating = "G";
+
+
+//  열에서 데이터 개수 50보다 큰 것만 필터링 
+// SELECT special_features, COUNT(*) AS cnt
+// FROM film 
+// GROUP BY special_features
+// HAVING cnt > 50;
+
+
+// DISTINCT
+// SELECT DISTINCT rating FROM film;
+// SELECT DISTINCT special_features, rating FROM film;
