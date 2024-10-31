@@ -35,3 +35,37 @@
 // - IN : 피연산자가 리스트 중 하나라도 포함되면 데이터 조회
 // - LIKE: 피연산자가 패턴 일치 시 데이터 조회
 // - SOME: 비교 집합 중 일부가 참인 경우 데이터 조회
+
+
+// --------- ORDER BY --------
+// 1.ORDER BY
+// 데이터 정렬 시 사용
+// 지정한 열 기준 오름차순 또는 내림차순(DESC) 정렬 (기본적으로 오름차순 ASC);
+// 열 순서에 따라 정렬 순서가 정해지기에 사용 주의
+// 데이터 정렬 우선순위에 따라 정렬 순서가 달라 질 수 있음 주의
+// 정렬 많은 비용 발생함으로 필요한 경우에 사용
+// SELECT 구문의 가장 마지막으로 사용
+
+// 1.1상위 N개 데이터 조회
+// 특정 조건에 해당하는 데이터 중 상위 N개의 데이터 추출 => SELECT 문에 LIMIT 조함
+// LIMIT 경우 상위 N개 반환하기에 정렬 우선순위가 중요함
+// 문법: SELECT 컬럼 FROM 테이블 WHERE 컬럼명 = 컬럼값 ORDER BY 컬럼 [ASC, DESC] LIMIT (N);
+
+// 1.2 상위 N-N개 구간 데이터 조회
+// LIMIT 문에서 파라마티어 2개 입력함
+// 문법: SELECT 컬럼 FROM 테이블 WHERE 컬럼명 = 컬럼값 ORDER BY 컬럼 [ASC, DESC] LIMIT (N),(N);
+
+
+// 1.3 상위/하위 아닌  특정 구간 데이터 조회 : OFFSET
+// 문법: SELECT 컬럼 FROM 테이블 WHERE 컬럼명 = 컬럼값 ORDER BY 컬럼 [ASC, DESC] LIMIT (N) OFFSET(N);
+
+// 예시 )
+// LIMIT 상위 데이터 조회 => limit ORDER BY 중요
+// SELECT * FROM customer ORDER BY store_id ASC, first_name ASC LIMIT 10;
+
+// LIMIT 구간 데이터 조회 => limit N,N
+// SELECT * FROM customer ORDER BY store_id ASC, first_name ASC LIMIT 10, 10;
+
+
+// OFFSET 특정구간 데이터 조회
+// SELECT * FROM customer ORDER BY store_id ASC, first_name ASC LIMIT 10 OFFSET 10;
