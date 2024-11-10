@@ -101,3 +101,39 @@ const sql_second = `SELECT first_name, hire_date FROM employees WHERE hire_date 
 const sql_result = `SELECT first_name, hire_date 
                     FROM employees 
                     WHERE hire_date >= (SELECT hire_date FROM employees WHERE first_name = 'Den')`;                      
+
+
+// 01. 그룹함수 
+// - 테이블에서 선택한 행을 컬럼 값에 따라 그룹별 결과 출력하는 함수 
+// - 그룹함수 유형: ROLLUP, GROUPING, GROUPING SETS, CUBE
+// * ROLLUP: 지정된 컬럼의 소계 및 총액을 구하는 함수 
+//  I) ROULLUP 함수 계층 구조로 인수가 2개 이상 인경우, 인수가 뒤바뀌면 결과도 바뀐다.
+
+// * CUBE: 결합 가능한 모든 값에 대해 집계 계산
+//  I): 결합 가능한 모든 값에 대해 다차원 집계 생성한다, 인수의 순서 뒤바껴도 상관없다.
+// II): 다른 그룹 함수보다 시스템 부하가 크다.
+// III): ORDER BY 절 필요한 경우 명시적으로 정렬 칼럼이 표시 되어야 함
+
+// * GROUPING: 컬럼의 소계 여부 확인
+//  I): 소계 함수 사용한 경우 1, 사용하지 않은 겨우 0을 반환함
+// II): GROPING SETS, ROLLUP 함수에 사용되며, SELECT 절과 HAVING 절에 사용 가능하다.
+
+// * GROUPING SETS: 집계 대상 컬럼에 대한 소계 계산
+// I): 문장 여러번 반복하지 않아도 원하는 결과 얻을 수 있음, 정렬 필요한 경우 ORDER BY 사용
+// II): 함수의 인수 뒤바뀌어도 상관없다.
+
+
+// 01-1  그룹함수 => 인수개수 순서 비교
+// ROLLUP 
+// - 인수 1개 일때 : CUBE 와 같은 결과
+// - 인수 2개 이상 일때 : 모두 다른 결과
+// - 인수 순서에 따른 다른 결과
+
+// GROUPING SETS
+// - 인수 2개 이상 일때 :모두 다른 결과
+// - 인수 순서 무관
+
+// CUBE (SUBTOTAL 생성 시 바람직 O, 시스템 많은 부하 주므로 주의!)
+// - 인수 1개 일때 : ROLLUP 와 같은 결과
+// - 인수 2개 이상 일때 :모두 다른 결과
+// - 인수 순서 무관
